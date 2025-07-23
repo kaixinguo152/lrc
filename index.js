@@ -51,7 +51,7 @@ function setOffset() {
   const index = findIndex();
   let offset = index * liHeight - containerHeight / 2 + liHeight / 2 + 30;
   // if (offset < 0) {
-  //   offset = 0;
+  //   offset = 30;
   // }
   // if (offset > maxOffset) {
   //   offset = maxOffset;
