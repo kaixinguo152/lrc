@@ -2,9 +2,8 @@ function parseLrc() {
   let lines = lrc.split("\n");
   let lrcs = [];
   for (let i = 0; i < lrcs.length; i++) {
-    const str = lines[i];
-    let parts = str.split("]");
-    let timeStr = parts[0].substring(1); // Remove the leading '['
+    const parts = lines.split("]");
+    const timeStr = parts[0].substring(1); // Remove the leading '['
     const obj = {
       time: parseTime(timeStr),
       words: parts[1],
