@@ -22,6 +22,7 @@ body .container {
 body .container li {
   color: #666;
   height: 30px;
+  line-height: 30px;
 }
 
 audio {
@@ -30,7 +31,8 @@ audio {
 }
 
 .active {
-  color: white;
-  font-weight: bold;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 1200;
   line-height: 30px;
 }

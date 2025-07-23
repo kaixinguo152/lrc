@@ -15,13 +15,6 @@ function parseLrc(lrc) {
 
 const lrcDara = parseLrc(lrc);
 
-const doms = {
-  audio: document.querySelector("audio"),
-  ul: document.querySelector(".lrc-list"),
-  container: document.querySelector(".container"),
-};
-console.log(doms);
-
 /**
  * parse time:change "00:01.06" to seconds
  */
@@ -43,27 +36,36 @@ function findIndex() {
   return lrcDara.length - 1;
 }
 
+const doms = {
+  audio: document.querySelector("audio"),
+  ul: document.querySelector(".lrc-list"),
+  container: document.querySelector(".container"),
+};
+console.log(doms);
+
 const containerHeight = doms.container.clientHeight;
 const liHeight = doms.ul.children[0].clientHeight;
 const maxOffset = doms.ul.clientHeight - containerHeight;
 
 function setOffset() {
   const index = findIndex();
-  const offset = index * liHeight - containerHeight / 2 + liHeight / 2;
-  if (offset < 0) {
-    offset = 0;
-  }
-  if (offset > maxOffset) {
-    offset = maxOffset;
-  }
+  let offset = index * liHeight - containerHeight / 2 + liHeight / 2 + 30;
+  // if (offset < 0) {
+  //   offset = 0;
+  // }
+  // if (offset > maxOffset) {
+  //   offset = maxOffset;
+  // }
+  console.log(offset);
+
   doms.ul.style.transform = `translateY(-${offset}px)`;
 }
 
 function setActiveState() {
-  const index = findIndex();
+  const index = findIndex() + 1;
 
   //remove active state
-  const li = doms.ul.querySelector(".active");
+  let li = doms.ul.querySelector(".active");
   if (li) {
     li.classList.remove("active");
   }
