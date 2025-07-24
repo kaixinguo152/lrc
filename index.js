@@ -43,26 +43,37 @@ const doms = {
 };
 console.log(doms);
 
+function createLrcElements() {
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < lrcDara.length; i++) {
+    const li = document.createElement("li");
+    li.textContent = lrcDara[i].words;
+    frag.appendChild(li);
+  }
+  doms.ul.appendChild(frag);
+}
+createLrcElements();
+
 const containerHeight = doms.container.clientHeight;
 const liHeight = doms.ul.children[0].clientHeight;
 const maxOffset = doms.ul.clientHeight - containerHeight;
 
 function setOffset() {
   const index = findIndex();
-  let offset = index * liHeight - containerHeight / 2 + liHeight / 2 + 30;
-  // if (offset < 0) {
-  //   offset = 30;
-  // }
-  // if (offset > maxOffset) {
-  //   offset = maxOffset;
-  // }
-  console.log(offset);
-
-  doms.ul.style.transform = `translateY(-${offset}px)`;
+  let offset = index * liHeight + liHeight / 2 - containerHeight / 2;
+  if (offset < 0) {
+    offset = -offset;
+    doms.ul.style.transform = `translateY(${offset}px)`;
+  } else if (offset > maxOffset) {
+    offset = maxOffset;
+    doms.ul.style.transform = `translateY(-${offset}px)`;
+  } else {
+    doms.ul.style.transform = `translateY(-${offset}px)`;
+  }
 }
 
 function setActiveState() {
-  const index = findIndex() + 1;
+  const index = findIndex();
 
   //remove active state
   let li = doms.ul.querySelector(".active");
@@ -75,17 +86,6 @@ function setActiveState() {
     li.classList.add("active");
   }
 }
-
-function createLrcElements() {
-  const frag = document.createDocumentFragment();
-  for (let i = 0; i < lrcDara.length; i++) {
-    const li = document.createElement("li");
-    li.textContent = lrcDara[i].words;
-    frag.appendChild(li);
-  }
-  doms.ul.appendChild(frag);
-}
-createLrcElements();
 
 doms.audio.addEventListener("timeupdate", () => {
   setOffset();
